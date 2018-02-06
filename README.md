@@ -30,3 +30,35 @@ db.orders.aggregate([
        }
   }
 ])
+
+
+------------------------------------
+
+db.orders.insert([
+{ "_id" : 10, "item" : "MON1003", "price" : 350, "quantity" : 2, "specs" :
+[ "27 inch", "Retina display", "1920x1080" ], "type" : "Monitor" }
+])
+
+
+db.inventory.insert([
+{ "_id" : 10, "sku" : "MON1003", "type" : "Monitor", "instock" : 120,
+"size" : "27 inch", "resolution" : "1920x1080" }
+])
+
+db.orders.aggregate([
+   {
+      $unwind: "$specs"
+   },
+   {
+      $lookup:
+         {
+            from: "inventory",
+            localField: "specs",
+            foreignField: "size",
+            as: "inventory_docs"
+        }
+   },
+   {
+      $match: { "inventory_docs": { $ne: [] } }
+   }
+])
