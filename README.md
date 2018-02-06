@@ -1,7 +1,10 @@
 mongoDB  with API sample
 
 https://dzone.com/articles/three-approaches-to-creating-a-sql-join-equivalent
-Join https://docs.mongodb.com/manual/reference/operator/aggregation/lookup/
+
+
+
+Exaple of Join https://docs.mongodb.com/manual/reference/operator/aggregation/lookup/
 
 
 db.orders.insert([
